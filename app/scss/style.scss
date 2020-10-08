@@ -1,0 +1,805 @@
+@import "vars";/* сюда записываются переменные */
+@import "libs";/* файл куда записываются библиотеки типа normalize итд */
+@import "fonts";/* файл со шрифтами */
+@import "global";/* файл со стилями для элементов - общими */
+
+header{
+ position: relative;/* чтобы ене было скролла внизу */
+ height: 100vh;/* чтобы был на весь экран */
+}
+.header__slider{
+    &-item{
+        height: 100vh;
+        background-image: url(../img/header-bg.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+}
+
+.slider-item__info{
+   position: absolute;
+   right: 80px;
+   bottom: 116px;  
+   text-align: right;  
+   color: #fff; 
+}
+.slider-item__info-title{
+    font-weight: 800;
+    font-size: 80px;
+    line-height: 86px;
+    margin-bottom: 48px;
+}
+
+.slider-item__info-text{
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 46px;  /* в макете высота строки 86 но мы уменьшили тк было слишком громоздко */
+    margin-bottom: 20px;/* в макете 67 но поставили 20 по эстетическимсоображениям */
+}
+
+.slider-item__info-suptitle{
+    margin-bottom: 5px;   
+}
+
+.slider-item__info-suptext{
+    margin-bottom: 8px;
+}
+/* стилим стрелки сверху слева */
+.slaider-arrows{
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    cursor: pointer;
+    z-index: 4;/* чтобы стрелки не были под картинкой фона а над */
+}
+
+.slaider-arrows__left{
+    right: 125px;
+}
+
+.slider-dotshead{
+    position: absolute;
+    right: 50px;/* расстояние между dots-box 30 вычитаем из ширины 230(?)(30+50=80по макету)*/
+    bottom: 36px; /* в макете 41 но уменьшили изза высоты dots-box 28(эстетика) */
+    max-width: 920px;
+    width: 100%;
+    color: white;
+    .slick-current{
+        .dots-box{
+            border-top: 4px solid $green;
+        }
+    }
+}
+/* &__name обращение по классу dots-box__number */
+.dots-box{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    height: 28px;
+    align-items: center;
+    border-top: 4px solid #fff;
+    padding-top: 6px;
+    &__number{
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 34px;    
+    }
+    &__name{
+    font-weight: 300;
+    line-height: 19px;
+    text-transform: capitalize;
+    opacity: 0.7;
+    }
+}
+
+.header__aside{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;/* чтобы надпись была над фоновой картинкой */
+    border-right: 1px solid rgba(#fff, .25);/* в scss можно написать границе цвет и прозрачность 0.25 */
+    height: 100vh;
+    text-align: center;
+    color: #fff;
+}
+
+.header__title{
+    font-weight: 800;
+    font-size: 200px;
+    line-height: 156px;
+    max-width: 467px;
+    opacity: 0.07;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;/* чтобы бло чуть меньше чм будет aside */    
+}
+
+.menu{
+    padding-top: 40px;
+        a{
+          
+            span{
+                display: block;
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 3px;
+                padding-top: 6px;/* задаем расстояние между картинками */
+                margin-bottom: 20px;
+                text-transform: capitalize;
+            }
+        }
+    }
+    /* меню для адаптива для разрешения меньше 1000 */
+    .menu-btn{
+        display: none;/* чтобы меню появлялось только при 1040 экранах */
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;/* делаем из меню круг */
+        border: 1px solid #fff ;
+        position: absolute;
+        right: 20px;
+        top: 70px;
+        z-index: 20;
+        background-color: rgba(255,255,255,0.1);/* взято с свойств header__aside */
+        &__inner{
+            width: 40px;
+        }
+        &__line{
+           height: 5px;
+           background-color: $green;
+           + .menu-btn__line{
+               margin-top: 5px;
+           }
+       }
+    }
+
+    .header__date{
+        font-weight: 800;
+        font-size: 72px;
+        line-height: 64px;
+        span{
+            padding-top: 20px;
+            font-weight: 300;
+            font-size: 16px;/* у родителя фонт сайз больше поэтом утут оставим чтобы перебить его значение */
+            line-height: 19px;
+            letter-spacing: 1.4px;
+            margin-bottom: 30px;
+            display: block;/* чтобы отображался как блок а не как строка */
+        }
+    }
+
+    .header__search{
+        padding-top: 15px;/* выставляем отступы в ниспекторе потом тут чтобы все влезало и было красиво */
+        padding-bottom: 35px;/* тут цифры берутся условно на глаз */
+    }
+
+    .header__location{
+        display: inline-block;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 1.05px;
+        position: relative;
+        padding-left: 19px;/* ширина значка карты 11+8отступ слева от california */
+        text-transform: capitalize;
+        &::before{
+            content: "";
+            position: absolute;
+            width: 11px;
+            height: 13px;
+            background-image: url(../img/marker.svg);
+            left: 0;
+            top: 0;
+        }
+    }
+.header__map{
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 3;/* чтобы была над фоновой картинкой хедера но под стрелками влево вправо */
+}
+.header__arrows{
+    position: absolute;
+    left: 210px;
+    bottom: 30px;/* в макете 40 но для эстетики поставили 30 */
+    z-index: 3;
+}
+
+.line-animation{
+    stroke-dashoffset: 600;/* определяет точку на пути SVG, откуда должен начинаться пунктир контура.(линия будет прорисовыватся по отрезкам от одной точки до другой и получится анимация */
+    stroke-dasharray: 600;/* Управляет видом пунктирной обводки(stroke-dasharray="1" нарисует линию из отрезков длиной одну единицу разделенных пробелами такой же ширины.) */
+    animation: animdash 4s infinite 6s;
+}
+/* значение для анимации */
+@keyframes animdash{
+   to{
+       stroke-dashoffset: 0;
+   }
+}
+
+.surf{
+  
+    background-image: url(../img/surf-bg.png);
+    background-repeat: no-repeat;
+    background-position: right 200px;/* 200px расстояние сверху */
+    background-size: auto;
+}
+
+.surf__subtitle{
+    text-align: right;
+    padding-right: 80px;/* можно еще написать transform:translateY(-100%) отступы делаем паддингами(?) */
+    margin-top: -80px;
+}
+
+.surf-box{
+    &__wrapper{
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    &__inner{
+        min-height: 750px;
+        background: rgba(#1C2121, .85);
+        position: relative;
+        transition: all 2s;
+      &:hover{
+        background: rgba(#1C2121, .3);
+        .surf-box__inner-btn{
+          display: block;/* чтобы кнопка появлялась при наведении(появлятся будет моментально потому что у display: block нет transition */
+        }
+      }  
+    }
+}
+
+.surf-box__inner-title{
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 36px;
+    padding:72px 0 0 40px;/* отступы делаем паддингами */
+    width: 140px; /* чтобы переносилось в две строки */
+}
+
+.surf-box__inner-location{
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 8px;   
+    transform: rotate(-90deg);
+    position: absolute;
+    bottom: 80px;
+    left: 40px;
+    width: 0;
+    height: 0;
+    white-space: nowrap;/* чтобы было в одну строчку */
+    span{
+        font-weight: 100;
+    } 
+}
+
+.surf-box__inner-btn{
+position: absolute;
+bottom: 0;
+text-align: center;
+left: 0;
+right: 0;
+display: none;/* чтобы кнопка отображалась только на активном слайдере */
+}
+
+.surf-slider{
+    padding-top: 110px;/* отступ сверх(не марджином кстати) */
+    .slaider-arrows{
+        top: 50px;
+        opacity: 0.25;
+    }
+    /* делаем так чтобы в слайдере слайды были с разными отступами */
+    .slick-slide:nth-child(4n + 1){
+       .surf-box{
+          margin-top: 32px;
+          /* 4n + 1 каждый четвертый начиная с первого(n -0 значит по формуле 0*4=0 0+1=1 и он добавит отступ первому слайду, потом 1+4=5 значит он добавит отступ 5 слайду  */
+       }
+    }
+    .slick-slide:nth-child(4n + 3){
+       .surf-box{
+         margin-top: 89px;
+       }
+    }
+    .slick-current{
+        .surf-box__inner-btn{
+            display: block;/* чтобы кнопка отображалась только на активном слайдере */
+        }
+        .surf-box__inner{
+        background: rgba(#1C2121, .3);/* смотрим значение прозрачности по фигме(или PS) чтобы активный слайдер был ярче остальных */
+      }
+    }
+}
+
+.slider-map{
+    max-width: 1200px;
+    min-height: 635px;
+    background-image: url(../img/world-map-dots.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+    .slick-list{
+        min-height: 635px;/* чтобы расставить все точки на карте по высоте */
+        overflow: visible;/* управляет отображением содержания блочного элемента, если оно целиком не помещается и выходит за область заданных размеров. */
+    }
+    .slick-current{
+        .slider-dots__content{
+            display: block;/* то есть если в slider-map есть slick-current(создаваемый при клике на точку в слайдере)то появляется окошко , которое мы отключили елси не нажата точка */
+            width: 285px;
+            padding: 28px 31px 0 32px;
+        }
+    }
+}
+
+.slider-dots__content-row{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}
+
+.slider-dots__content-item{
+    text-align: center;
+    img{
+        margin-bottom: 7px;
+    }
+}
+
+.slider-dots__content-number{
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 23px;    
+}
+
+.slider-dots__content-name{
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 12px;
+    opacity: 0.6;
+}
+
+.slider-dots__content-title{
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 26px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    &::before{
+        content: "";
+        position: absolute;
+        background-color: $green;
+        width: 80px;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+    }    
+}
+.slider-dots__content-subtitle{
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: capitalize;
+}
+
+.slider-dots__content-link{
+    padding-top: 4px;  
+}
+
+.slider-dots__circle{
+   width: 23px;
+   height: 23px;
+   background-color: $green;
+   border-radius: 50%;
+   box-shadow: 0px 0px 35px rgba(74, 246, 205, 0.837777);
+}
+
+.slider-dots__content{
+    display: none;
+    background:rgba(#0F1010, .7);
+    mix-blend-mode: normal;
+    border-radius: 6px;
+    position: absolute;
+    bottom: 35px;
+    transform: translateX(-50%);
+    z-index: 1;
+    /* рисуем треyгольник сверху чтобы при клике кружок становился каплей */
+    &::before{
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-bottom: 20px solid $green;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        bottom: -21px;
+        left: calc(50% - 1px);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+}
+
+.slider-dots{
+    position: relative;
+}
+
+.slider-dots--1{
+   top: 335px;
+   left: 0;
+   .slider-dots__content{
+    transform: translateX(0);
+    &::before{
+        left: - 0.5px;
+    }
+  }
+}
+.slider-dots--2{
+  top: 270px;
+  left: 0;
+  .slider-dots__circle{
+   position: relative;
+  &::before{
+      content: "";
+      position: absolute;
+      background-image: url(../img/minimarker.png);
+      width: 14px;
+      height: 17px;
+      background-size: cover;
+      right: -15px;
+      top: -25px;
+    }
+  }
+}
+.slider-dots--3{
+    top: 327px;
+    left: 25px;
+}
+.slider-dots--4{
+    top: 400px;
+    left: -25px;
+}
+.slider-dots--5{
+    top: 230px;
+    left: -65px;
+}
+.slider-dots--6{
+    top: 550px;
+    left: -120px;
+}
+.slider-dots--7{
+    top: 375px;
+    left: -95px;    
+}
+.slider-dots--8{
+    top: 470px;
+    left: 35px;
+    .slider-dots__content{
+        transform: translateX(-262px);
+        &::before{
+            left: auto;
+            right: 0.5px;
+        }
+    }      
+}
+
+.holder{
+   background-image: url(../img/travel-bg.png);
+   /* чтобы вставить другую картинку вместо бокала применим вложенность (scss позволяет)*/
+   &.sleep{
+    background-image: url(../img/flower-big.png);/* &.sleep означает что когда holder будет добавлен класс sleep фоновая картинка будет другая */
+   }
+   background-position: bottom right;
+   background-repeat: no-repeat;
+   /* margin-bottom: 300px; */ /* убрали это значение тк после копирования секции sleep нужны снизу и вверху адекватные расстояние между секциями */
+   .slaider-arrows{/* прописаны в слик слайдере main.js */
+       top: 225px;
+       opacity: .25;
+   }
+}
+
+.holder-slider{
+    &__head{
+        background-repeat: no-repeat;
+        background-position: top left;
+        min-height: 780px;
+    }
+    &__descr{
+        margin-top: -230px;
+        padding: 160px 0 0 132px;
+        min-height: 320px;
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: contain;
+        .descr__head{
+           position: relative;
+           padding-right: 225px;
+           &.descr__head-sleep{
+           padding-right: 225px;/* чтобы пять звезд влезло */
+         }
+           img{
+               position: absolute;
+               right: 150px;
+               top: -10px;
+           }
+           .holder__star-list{
+               position: absolute;
+               right: -20px;
+               top: -12px;
+               img{
+                   position: static;
+
+               }
+           }
+        }
+    }
+    &__subtitle{
+        text-align: right;
+        padding: 132px 80px 0 0;
+    
+    }
+    &__btn{
+        text-align: center;
+    }
+}
+
+.holder-slider__info{
+    display: flex;
+    justify-content: space-around;
+}
+
+.holder-slider__info-item{
+    min-height: 200px;
+    margin-bottom: 66px;
+    position: relative;
+}
+
+.holder-slider__info-subtitle{
+    position: absolute;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: right;
+    letter-spacing: 8px;
+    opacity: 0.5;
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    left: -97px;   
+    width: 200px; 
+    height: 0;/* высоту задаем относительно самой высокой надписи из 4х */
+    top: 95px;
+
+}
+.holder-slider__info-title{
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 36px;
+    padding-left: 40px;
+    position: relative;
+    .holder-prising__span{
+        position: absolute;
+        font-size: 14px;
+        line-height: 36px;
+        text-align: right;
+        letter-spacing: 5.25px;
+        mix-blend-mode: normal;
+        opacity: 0.75;
+        font-weight: 400; 
+        top: 25px;
+        right: -8px;
+    }
+}
+
+.shop{
+    background-image: url(../img/shop-background-bg.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    .slaider-arrows{/* вложенность - т.е. свойства для slaider-arrows написанные тут (прозрачность) будут применены только внутри элемента .shop */
+        opacity: 0.25;
+    }
+}
+
+.shop__slider{
+    padding-left: 132px;
+}
+
+.shop__slaider-inner{
+    display: flex;
+}
+
+.shop__slider-info{
+    max-width: 480px;
+    width: 100%;
+    margin-right: 40px;
+    padding-top: 150px
+}
+
+.descr__head-shop{
+    max-width: 340px;
+    margin-bottom: 47px;
+}
+
+.shop__star-list{
+    margin-left: -9px;
+}
+
+.shop__slider-price{
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 40px;
+    margin-bottom: 64px;
+    sup{
+        font-size: 18px;
+        padding-left: 2px;
+    }    
+}
+
+.shop__slider-content{
+    padding-left: 170px;
+    display: flex;
+    align-items: flex-end;/* располагаем внизу две колонки */
+}
+
+.shop__extras{
+    padding-left: 150px;
+}
+
+.shop__extras-inner{
+    display: flex;
+}
+
+.shop__extras-title{
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 40px;
+    margin-bottom: 25px;
+}
+
+.shop__extras-box{
+    text-align: center;
+    margin-right: 57px;
+}
+/* cтилизуем две колонки справа от доски с картинками воска */
+.shop__extras-images{
+    min-height: 105px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.shop__extras-name{
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 8px;
+    opacity: 0.5;
+    margin-bottom: 16px;
+}
+
+.shop__extras-price{
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 40px;    
+}
+
+.surfboard{
+    position: relative;
+}
+
+.surfboard-box{
+    position: absolute;
+    /* right:40px;  
+    top: 215px; */
+    /* сначала стилили один круг, потом эти параметры присвоим первому кругу тк стилили его первым(и верхним) */
+}
+
+.surfboard__position--1{
+    right:40px;
+    top: 215px;   
+}
+.surfboard__position--2{
+    left: -6px;
+    top: 313px;
+}
+.surfboard__position--3{
+    bottom: 70px;
+    left: 52px;
+    .surfboard-box__content{/* чтобы у нижнего круга всплывающий элемент при клике был слева меняем некоторые значения */
+        padding-left: 0;
+        top: -15px;
+        left: -400px;
+        padding-right: 104px;
+        &::before{
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 1px;
+            background-color: #fff;
+            right: 0;
+            left: auto;
+            top: 50%;
+        }            
+    }
+}
+/* кружок в доске на который будем кликать */
+.surfboard-box__circle{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: relative;
+    background-color: white;
+    cursor: pointer;
+    &.active{/* выбранный элемент прописанный в main.js, класс active добавляется при клике на кружок (прописано в main.js) */
+        .circle-row{
+            transform: translate(-50%, -50%) rotate(0deg);/* чтобы при нажатии на плюс он становился минусом к активному элеенту применяются эти правила и получится минус*/
+        }
+    }
+}
+/* минус внутри круга(когда по нему кликнули */
+.circle-row{
+    background-color: $green;
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    /* до & минус не будет переворачиватся после амперсанта к нему применятся до свойства и получится плюс(перевернули минус на 90 градусов) */
+    & + .circle-row{/* circle-row это две линии(два дива) при помощи +(плюса) мы обращаемся ко второй линии (& + .circle-row обращение начиная со второго элемента) и ставим ее в 90 градусов получается плюс */
+        transform: translate(-50%, -50%) rotate(90deg);/* добавили такую же линию с помощью transform 90deg  и получился плюс */       
+    }
+}
+/* если "встречаются элемент active и surfboard-box__circle(то есть при клике на круг)  то   __content будет отображатся  */
+.surfboard-box__circle.active + .surfboard-box__content{
+  display: block;
+}
+
+.surfboard-box__content{
+    display: none;/* делаем чтобы этот элемент не отображался и был виден при клике на круг */
+    position: absolute;
+    width: 359px;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 24px;
+    padding-left: 104px;  
+    top: -15px;
+    left: 30px;
+    &::before{
+        content: "";
+        position: absolute;
+        width: 80px;
+        height: 1px;
+        background-color: #fff;
+        left: 0px;
+        top: 50%;
+    }    
+}
+
+.footer{
+    text-align: center;
+    padding: 285px 0 34px;
+    .btn{
+        span{
+            padding: 17px 17px 15px ; /* тк стрелки нет то убрали отступ слева чуток */
+       &:after{/* span тк serf прописано в спане и стрелка для кнопки там же а тут мы ее убираем тк в макете ее нет (кнопка в футере) */
+            display: none;
+       }
+     }
+   }
+
+}
+.footer__copy{
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 1.05px;
+    opacity: 0.5;   
+    padding-top: 27px; 
+}
+
+
+
+@import "media";/* файл для медиа запросов */
